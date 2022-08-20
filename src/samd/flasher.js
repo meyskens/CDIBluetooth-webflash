@@ -1,5 +1,5 @@
 import { SamBA, Device, sleep, Flasher } from "bossa-web";
-import * as esploaderMod from "esp-web-flasher";
+import * as esploaderMod from "../libs/esp-web-flasher/dist/index";
 
 // import { serial } from "web-serial-polyfill";
 const observer = {
