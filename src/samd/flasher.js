@@ -49,11 +49,21 @@ export const flashStageTwo = async (setProgress, setProgressMsg) => {
   setProgressMsg("Wondering what Ganon is up to...");
   setProgress(45);
 
-  const esploader = await esploaderMod.connect({
-    log: (...args) => console.log(...args),
-    debug: (...args) => console.log(...args),
-    error: (...args) => console.log(...args),
+  const port = await navigator.serial.requestPort({
+    filters: [
+      {
+        usbVendorId: 0x2341,
+        usbProductId: 0x8057,
+      },
+    ],
   });
+
+  console.log("Connecting...");
+  await port.open({ baudRate: 115200 });
+
+  console.log("Connected successfully to ESP.");
+
+  const esploader = new esploaderMod.ESPLoader(port, console);
 
   await esploader.initialize();
 
