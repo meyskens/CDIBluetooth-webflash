@@ -482,7 +482,7 @@ export class ESPLoader extends EventTarget {
    * ESP ROM bootloader, we will retry a few times
    */
   async sync() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       this._inputBuffer.length = 0;
       let response = await this._sync();
       if (response) {
