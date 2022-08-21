@@ -1,6 +1,8 @@
 import { SamBA, Device, sleep, Flasher } from "bossa-web";
 import * as esploaderMod from "../libs/esp-web-flasher/dist/index";
 
+const philips = new Audio("philips.mp3");
+
 // import { serial } from "web-serial-polyfill";
 const observer = {
   onStatus: (message) => {
@@ -115,6 +117,7 @@ export const flashStageThree = async (setProgress, setProgressMsg) => {
   const data = await getFile("cdib.bin");
   setProgress(90);
   setProgressMsg("(insert Philips Media Interactive sound here)");
+  philips.play();
   await flasher.write(data, offset);
   await dev.reset();
   setProgressMsg("Cleaning my CD off...");
