@@ -16,7 +16,10 @@ function App() {
   const [stage, setStage] = useState(0);
 
   function getBrowserMessage() {
-    if (navigator.userAgent.indexOf("Safari") !== -1) {
+    if (
+      navigator.userAgent.indexOf("Safari") !== -1 &&
+      !window.chrome.runtime
+    ) {
       return "Sorry, as much as I like Safari";
     } else if (navigator.userAgent.indexOf("Firefox") !== -1) {
       return "Sorry, as much as I like Firefox";
