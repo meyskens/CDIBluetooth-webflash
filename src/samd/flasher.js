@@ -36,6 +36,7 @@ export const flashStageOne = async (setProgress, setProgressMsg) => {
   setProgressMsg("Playing some Nobelia...");
   await flasher.write(data, offset);
   await dev.reset();
+
   setProgressMsg("Get ready to select the arduino again...");
   setProgress(40);
   await sleep(1000);
@@ -77,6 +78,7 @@ export const flashStageTwo = async (setProgress, setProgressMsg) => {
   setProgressMsg("Ensuring the compact disks are interactive...");
   setProgress(45);
   const data = await getFile("bluepad.bin");
+  await sleep(500);
 
   setProgressMsg("Looking for my Wiimote... (this might take a while)");
   setProgress(60);
@@ -84,34 +86,42 @@ export const flashStageTwo = async (setProgress, setProgressMsg) => {
   await espStub.flashData(
     data,
     (bytesWritten, totalBytes) => {
-      console.log(bytesWritten, totalBytes);
+      setProgress(Math.floor(60 + (bytesWritten / totalBytes) * 9));
+      if (bytesWritten / totalBytes > 0.7) {
+        setProgressMsg(
+          "Reminding all people that the CD-i is a multimedia machine not a consle... (this might take a while)"
+        );
+      } else if (bytesWritten / totalBytes > 0.4) {
+        setProgressMsg(
+          "Looking for my The Aprentice cheat codes... (this might take a while)"
+        );
+      }
     },
     0x00 // 0 but fancy
   );
 
-  setProgressMsg("Counting rubys...");
-  setProgress(65);
+  setProgressMsg("Counting if i have enough rubys...");
   await espStub.disconnect();
   await esploader.port.close();
 };
 
 export const flashStageThree = async (setProgress, setProgressMsg) => {
   setProgress(70);
-  setProgressMsg("Connecting to device");
+  setProgressMsg("Get ready to select the arduino again...");
+
   let port = await getPort();
   console.log("Got port", port);
-  setProgress(80);
-  setProgressMsg("Get ready to select the arduino again...");
-  const { samba, dev } = await attachPort(port);
-  console.log("dev", dev);
-
-  var flasher = new Flasher(samba, dev.flash, observer);
-  let offset = 0x00002000;
 
   setProgress(85);
   setProgressMsg(
     "If you need instructions on how to get through the hotels, check out the enclosed instructions book"
   );
+
+  const { samba, dev } = await attachPort(port);
+  console.log("dev", dev);
+
+  var flasher = new Flasher(samba, dev.flash, observer);
+  let offset = 0x00002000;
 
   await flasher.erase(offset);
   const data = await getFile("cdib.bin");
@@ -119,8 +129,10 @@ export const flashStageThree = async (setProgress, setProgressMsg) => {
   setProgressMsg("(insert Philips Media Interactive sound here)");
   philips.play();
   await flasher.write(data, offset);
-  await dev.reset();
+  await sleep(1000);
+
   setProgressMsg("Cleaning my CD off...");
+  await dev.reset();
   await sleep(1000);
 
   setProgress(100);
