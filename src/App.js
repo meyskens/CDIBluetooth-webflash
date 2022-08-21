@@ -15,6 +15,21 @@ function App() {
   const [progressMsg, setProgressMsg] = useState("");
   const [stage, setStage] = useState(0);
 
+  function getBrowserMessage() {
+    if (navigator.userAgent.indexOf("Safari") !== -1) {
+      return "Sorry, as much as I like Safari";
+    } else if (navigator.userAgent.indexOf("Firefox") !== -1) {
+      return "Sorry, as much as I like Firefox";
+    } else if (
+      navigator.userAgent.indexOf("MSIE") !== -1 ||
+      !!document.documentMode === true
+    ) {
+      return "Oh wow, you're using Internet Explorer... Sorry about that... Anyway, ";
+    }
+
+    return "I'm sorry,";
+  }
+
   const flashOne = async () => {
     setFlashing(true);
     try {
@@ -119,9 +134,9 @@ function App() {
             </p>
           ) : (
             <Alert variant="danger">
-              You need a browser that supports WebSerial to use this app. Sorry
-              about that, you will need to use the latest Chrome, Opera or Edge
-              to run this.
+              {getBrowserMessage()} you need a browser that supports WebSerial
+              to use this app. You will need to use the latest Chrome, Opera or
+              Edge to run this.
             </Alert>
           )}
         </Col>
