@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import Alert from "react-bootstrap/Alert";
 
 import { flashStageOne, flashStageTwo, flashStageThree } from "./samd/flasher";
 
@@ -103,18 +104,26 @@ function App() {
             Connect your CD-i Bluetooth module with USB (DISCONNECT IT FROM THE
             CD-i). And then, click the button below.
           </p>
-          <p>
-            <input
-              type="checkbox"
-              id="agreed"
-              onChange={(e) => setAgreed(e.target.checked)}
-              checked={agreed}
-            />
-            &nbsp;
-            <label for="agreed">
-              I agree to not sue, have bugs and to give up my first born child
-            </label>
-          </p>
+          {navigator.serial ? (
+            <p>
+              <input
+                type="checkbox"
+                id="agreed"
+                onChange={(e) => setAgreed(e.target.checked)}
+                checked={agreed}
+              />
+              &nbsp;
+              <label for="agreed">
+                I agree to not sue, have bugs and to give up my first born child
+              </label>
+            </p>
+          ) : (
+            <Alert variant="danger">
+              You need a browser that supports WebSerial to use this app. Sorry
+              about that, you will need to use the latest Chrome, Opera or Edge
+              to run this.
+            </Alert>
+          )}
         </Col>
       </Row>
       {agreed ? flasher : null}
