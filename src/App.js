@@ -119,8 +119,25 @@ function App() {
         <Col>
           <h2>Instructions</h2>
           <p>
-            Connect your CD-i Bluetooth module with USB (DISCONNECT IT FROM THE
-            CD-i). And then, click the button below.
+            <ol>
+              <li>Disconnect the Bluetooth module from the CD-i</li>
+              <li>Connect it using USB to your computer</li>
+              <li>Agree to the terms below</li>
+              <li>Click the "Start upgrade!" button</li>
+              <li>
+                Select the Arduino board from the list your browser shows you,
+                do this every time it asks you.
+              </li>
+              <li>
+                When you see a button to continue click it (your browser needs
+                that for security reasons)
+              </li>
+              <li>
+                If an error is given, try again. (I know i should fix that but
+                can't you read... ALPHA)
+              </li>
+              <li>Sit back and enjoy!</li>
+            </ol>
           </p>
           {navigator.serial ? (
             <p>
