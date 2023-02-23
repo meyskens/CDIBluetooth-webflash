@@ -77,7 +77,7 @@ export const flashStageTwo = async (setProgress, setProgressMsg) => {
 
   setProgressMsg("Ensuring the compact disks are interactive...");
   setProgress(45);
-  const data = await getFile("bluepad.bin");
+  const data = await getFile("bluepad-a2.bin");
   await sleep(500);
 
   setProgressMsg("Looking for my Wiimote... (this might take a while)");
@@ -124,7 +124,7 @@ export const flashStageThree = async (setProgress, setProgressMsg) => {
   let offset = 0x00002000;
 
   await flasher.erase(offset);
-  const data = await getFile("cdib.bin");
+  const data = await getFile("cdib-a2.bin");
   setProgress(90);
   setProgressMsg("(insert Philips Media Interactive sound here)");
   philips.play();

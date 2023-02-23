@@ -108,7 +108,7 @@ function App() {
     <Container className="bg-dark text-white">
       <Row>
         <Col>
-          <h1>CD-i Bluetooth - Firmware Update ALPHA</h1>
+          <h1>CD-i Bluetooth - Firmware Update ALPHA 2</h1>
           <p>
             This is a web firmware updater for the CD-i Bluetooth mouse support!
             Get it first and get bitten by bugs!
@@ -134,7 +134,7 @@ function App() {
               </li>
               <li>
                 If an error is given, try again. (I know i should fix that but
-                can't you read... ALPHA)
+              -  can't you read... ALPHA)
               </li>
               <li>Sit back and enjoy!</li>
             </ol>
