@@ -89,7 +89,7 @@ export const flashStageTwo = async (setProgress, setProgressMsg) => {
       setProgress(Math.floor(60 + (bytesWritten / totalBytes) * 9));
       if (bytesWritten / totalBytes > 0.7) {
         setProgressMsg(
-          "Reminding all people that the CD-i is a multimedia machine not a consle... (this might take a while)"
+          "Reminding all people that the CD-i is a multimedia machine not a conosle... (this might take a while)"
         );
       } else if (bytesWritten / totalBytes > 0.4) {
         setProgressMsg(
